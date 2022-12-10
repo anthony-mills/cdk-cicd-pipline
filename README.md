@@ -1,6 +1,6 @@
 # CDK AWS CICD Pipeline 
 
-This is a sample CICD pipeline that can be provisioned with the [Amazon Cloud Development Kit ( CDK )](https://aws.amazon.com/cdk/).
+This is a sample CICD pipeline using the AWS range of development services that can be provisioned with the [Amazon Cloud Development Kit ( CDK )](https://aws.amazon.com/cdk/).
 
 ## Useful CDK commands
 
