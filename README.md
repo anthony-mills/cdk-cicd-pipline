@@ -1,10 +1,8 @@
-# Welcome to your CDK TypeScript project
+# CDK AWS CICD Pipeline 
 
-This is a blank project for CDK development with TypeScript.
+This is a sample CICD pipeline that can be provisioned with the [Amazon Cloud Development Kit ( CDK )](https://aws.amazon.com/cdk/).
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-## Useful commands
+## Useful CDK commands
 
 * `npm run build`   compile typescript to js
 * `npm run watch`   watch for changes and compile
