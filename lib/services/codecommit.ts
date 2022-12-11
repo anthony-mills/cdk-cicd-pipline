@@ -1,7 +1,7 @@
 import * as codecommit from 'aws-cdk-lib/aws-codecommit';
 import * as path from "path";
 
-import codeConf from "../../config/codecommit";
+import pipelineConf from "../../config/pipeline";
 
 export class CodeCommit {
     appScope: any;
@@ -19,12 +19,12 @@ export class CodeCommit {
      */
     public createRepo() : codecommit.Repository
     {
-        return new codecommit.Repository(this.appScope, codeConf.repo_name + 'CodeCommitRepo', {
-            repositoryName: codeConf.repo_name,
-            description: codeConf.repo_description,
+        return new codecommit.Repository(this.appScope, pipelineConf.code_commit.repo_name + 'CodeCommitRepo', {
+            repositoryName: pipelineConf.code_commit.repo_name,
+            description: pipelineConf.code_commit.repo_description,
             code: codecommit.Code.fromDirectory(
                 path.join(__dirname, '../../codebase/repo'),
-                codeConf.repo_branch
+                pipelineConf.code_commit.repo_branch
             ),
         });
     }
