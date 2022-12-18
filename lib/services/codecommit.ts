@@ -3,7 +3,7 @@ import * as path from "path";
 
 import pipelineConf from "../../config/pipeline";
 
-export class CodeCommit {
+export default class CodeCommit {
     appScope: any;
 
     public constructor(appScope: any) {
