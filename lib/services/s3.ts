@@ -21,7 +21,6 @@ export default class S3Storage {
             websiteErrorDocument: appConf.website_bucket.site_error,
             publicReadAccess: true,
         });
-
         this.addBucketContent(s3Bucket);
 
         return s3Bucket;
@@ -41,5 +40,4 @@ export default class S3Storage {
             destinationBucket: s3Bucket,
         });
     }
-
 }

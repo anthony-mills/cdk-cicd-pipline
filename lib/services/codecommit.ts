@@ -2,13 +2,10 @@ import * as codecommit from 'aws-cdk-lib/aws-codecommit';
 import * as path from "path";
 
 import pipelineConf from "../../config/pipeline";
+import {Construct} from "constructs";
 
 export default class CodeCommit {
-    appScope: any;
-
-    public constructor(appScope: any) {
-        this.appScope = appScope;
-    }
+    constructor(private scope: Construct) {}
 
     /**
      * Create a new code commit repository
@@ -19,7 +16,7 @@ export default class CodeCommit {
      */
     public createRepo() : codecommit.Repository
     {
-        return new codecommit.Repository(this.appScope, pipelineConf.code_commit.repo_name + 'CodeCommitRepo', {
+        return new codecommit.Repository(this.scope, pipelineConf.code_commit.repo_name + 'CodeCommitRepo', {
             repositoryName: pipelineConf.code_commit.repo_name,
             description: pipelineConf.code_commit.repo_description,
             code: codecommit.Code.fromDirectory(

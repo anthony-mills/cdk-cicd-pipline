@@ -1,13 +1,10 @@
 import * as codepipeline from 'aws-cdk-lib/aws-codepipeline';
 
 import pipelineConf from "../../config/pipeline";
+import {Construct} from "constructs";
 
 export class CodePipeline {
-    appScope: any;
-
-    public constructor(appScope: any) {
-        this.appScope = appScope;
-    }
+    constructor(private scope: Construct) {}
 
     /**
      * Create a new code commit repository
@@ -18,7 +15,7 @@ export class CodePipeline {
      */
     public createPipeline() : codepipeline.Pipeline
     {
-        return new codepipeline.Pipeline(this.appScope, 'CICDPipline', {
+        return new codepipeline.Pipeline(this.scope, 'CICDPipline', {
             pipelineName: pipelineConf.code_pipeline.pipeline_name
         });
     }
