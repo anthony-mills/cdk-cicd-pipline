@@ -1,4 +1,4 @@
-### Sample Pproject README  
+### CDK Static Website CICD pipeline
 
-Sample README for the sample CDK CICD pipline.
+CDK CICD pipline that will deploy static website code to an S3 bucket.
 
