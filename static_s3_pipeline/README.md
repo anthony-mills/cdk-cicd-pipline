@@ -26,6 +26,11 @@ Replace the html code in the codebase folder with your own.
 
 _cp -r /tmp/my_files ./codebase_
 
+Review the config settings for the stack by opening and reviewing the configuration files:
+
+_vim config/general.ts_
+_vim config/pipeline.ts_
+
 Deploy the CDK stack with the command:
 
 _npx cdk deploy_

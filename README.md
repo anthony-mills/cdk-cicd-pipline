@@ -1,6 +1,6 @@
 # CDK AWS CICD Pipelines
 
-This is a collection of sample CICD pipelines using the AWS range of development services.
+This is a collection of simple CICD pipelines using the AWS range of development services.
 
 These services are provisioned with the [Amazon Cloud Development Kit ( CDK )](https://aws.amazon.com/cdk/).
 
