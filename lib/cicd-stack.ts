@@ -10,7 +10,7 @@ export class CiCdStack extends cdk.Stack {
     let codeCommit= new CodeCommit(this);
     let codeRepo = codeCommit.createRepo();
     let codePipeline = new CodePipeline(this);
-    let deployPipeline = codePipeline.createPipeline(codeRepo);
+    let deployPipeline = codePipeline.createPipeline(codeRepo, s3Bucket);
     codeCommit.repoAction(codeRepo, deployPipeline);
   }
 }
