@@ -5,20 +5,23 @@ import * as path from "path";
 import pipelineConf from "../../config/pipeline";
 import {Construct} from "constructs";
 import * as codepipeline from "aws-cdk-lib/aws-codepipeline";
+import stackOutputs from "./stack_outputs";
 
-export default class CodeCommit {
-    constructor(private scope: Construct) {}
+export default class CodeCommit extends stackOutputs {
+    constructor(protected scope: Construct) {
+        super(scope);
+    }
 
     /**
      * Create a new code commit repository
      *
-     * @return {codecommit.Repository}
+     * @return {codecommit.Repository} codeRepo
      *
      * @public
      */
     public createRepo() : codecommit.Repository
     {
-        return new codecommit.Repository(this.scope, pipelineConf.code_commit.repo_name + "CodeCommitRepo", {
+        let codeRepo = new codecommit.Repository(this.scope, pipelineConf.code_commit.repo_name + "CodeCommitRepo", {
             repositoryName: pipelineConf.code_commit.repo_name,
             description: pipelineConf.code_commit.repo_description,
             code: codecommit.Code.fromDirectory(
@@ -26,6 +29,10 @@ export default class CodeCommit {
                 pipelineConf.code_commit.repo_branch
             ),
         });
+
+        this.resourceOutput("WebsiteRepo", codeRepo.repositoryName, codeRepo.repositoryArn);
+
+        return codeRepo;
     }
 
     /**

@@ -1,10 +1,15 @@
+import * as cdk from "aws-cdk-lib";
 import {aws_s3, aws_s3_deployment} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import appConf from '../../config/general'
+import stackOutputs from "./stack_outputs";
 
-export default class S3Storage {
+export default class S3Storage extends stackOutputs{
 
-    constructor(private scope: Construct) {}
+    constructor(protected scope: Construct) {
+        super(scope);
+    }
+
     /**
      * Create a bucket to store the static website
      *
@@ -21,7 +26,10 @@ export default class S3Storage {
             websiteErrorDocument: appConf.website_bucket.site_error,
             publicReadAccess: true,
         });
+
         this.addBucketContent(s3Bucket);
+        this.resourceOutput("WebsiteBucket", s3Bucket.bucketName, s3Bucket.bucketArn);
+        new cdk.CfnOutput(this.scope, "BucketUrl", { value: s3Bucket.bucketWebsiteUrl, exportName: "BucketURL"});
 
         return s3Bucket;
     }

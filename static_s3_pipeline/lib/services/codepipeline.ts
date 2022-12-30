@@ -3,9 +3,12 @@ import * as codepipelineActions from 'aws-cdk-lib/aws-codepipeline-actions';
 import pipelineConf from "../../config/pipeline";
 import {Construct} from "constructs";
 import {aws_codecommit, aws_s3} from "aws-cdk-lib";
+import stackOutputs from "./stack_outputs";
 
-export default class CodePipeline {
-    constructor(private scope: Construct) {}
+export default class CodePipeline extends stackOutputs {
+    constructor(protected scope: Construct) {
+        super(scope);
+    }
 
     /**
      * Create a new code commit repository
@@ -13,14 +16,14 @@ export default class CodePipeline {
      * @param {aws_codecommit.Repository} codeRepo
      * @param {aws_s3.Bucket} websiteBucket
      *
-     * @return {codepipeline.Pipeline}
+     * @return {codepipeline.Pipeline} codePipe
      *
      * @public
      */
     public createPipeline(codeRepo: aws_codecommit.Repository, websiteBucket: aws_s3.Bucket) : codepipeline.Pipeline
     {
         let sourceArtifact = new codepipeline.Artifact();
-        return new codepipeline.Pipeline(this.scope, 'CICDPipeline', {
+        let codePipe =  new codepipeline.Pipeline(this.scope, 'CICDPipeline', {
             pipelineName: pipelineConf.code_pipeline.pipeline_name.replace(/\s/g, '-'),
             stages: [
                 {
@@ -56,5 +59,9 @@ export default class CodePipeline {
                 },
             ],
         });
+
+        this.resourceOutput("DeployPipeline", codePipe.pipelineName, codePipe.pipelineArn);
+
+        return codePipe;
     }
 }
